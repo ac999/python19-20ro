@@ -1,4 +1,4 @@
-import script
+import script as scr
 
 _text = '''<h2>Als ter verdeeld mee gesticht interest verleden</h2>
 
@@ -11,11 +11,16 @@ zuidgrens.</p>'''
 
 # Exercise 1:
 print("Exercise 1:")
-print(script.word_extractor(_text))
+print(scr.word_extractor(_text))
 
 # Exercise 2:
-r = '\w+'
+r1 = '\w+'
 print("Exercise 2:")
-print(script.apply_re_len(r,_text,6))
+print(scr.apply_re_len(r1,_text,6))
 
 # Exercise 3:
+r2 = '[a-t]+'
+print("Exercise 3:")
+print(scr.apply_listre(_text,[r1,r2]))
+
+# Exercise 4:
