@@ -25,10 +25,22 @@ def xml_parse(xmlDocumentPath,**attrs):
 
         _set=_set.union(*[
         set(re.findall(
-        "{0}=\"{1}\"".format(key,attrs[key]),_buffer
+        "{0}\s*=\s*\"{1}\"".format(key,attrs[key]),_buffer
         ) )
         for key in _keys] )
 
         if not _buffer:
             break
     return _set
+
+def cens_repl(m):
+    censorship = list(m.group(1))
+    for i in range(len(censorship)):
+        if i%2 != 0:
+            censorship[i]="*"
+    return "*"+"".join(censorship)
+
+def censure(text):
+    return re.sub(r"\b[aeiouAEIOU](\w+)\b",cens_repl,text)
+    # (Note that \b is used to represent word boundaries, and means “backspace”
+    # only inside character classes.)

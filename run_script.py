@@ -30,3 +30,7 @@ _attrs = {
 }
 print("Exercise 4:")
 print(scr.xml_parse("./books.xml",**_attrs))
+
+# Exercise 6
+print("Exercise 6:")
+print(scr.censure(_text))
