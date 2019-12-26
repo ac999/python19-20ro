@@ -13,7 +13,7 @@ def choose(a,b):
 	return random.randint(a,b)
 
 def getMinute(start):
-	return int((start-dttm.now()).total_seconds()/60)
+	return int((dttm.now()-start).total_seconds()/60)
 
 if len(sys.argv)!=3:
 	helper()
