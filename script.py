@@ -169,7 +169,6 @@ for the directories on the last level.
 '''
 
 def touch(file,size):
-	print(file)
 	f = open(file,"w+b")
 	f.seek(size-1)
 	f.write(b"\0")
