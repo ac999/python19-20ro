@@ -1,5 +1,7 @@
 # Regular expressions
 
+https://sites.google.com/site/fiipythonprogramming/laboratories/lab-11
+
 1) Write a function that extracts the words from a given text as a parameter. A word is defined as a sequence of alpha-numeric characters.
 
 
