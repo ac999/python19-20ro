@@ -24,3 +24,9 @@ print("Exercise 3:")
 print(scr.apply_listre(_text,[r1,r2]))
 
 # Exercise 4:
+_attrs = {
+"id": "bk104",
+"version": "1.0"
+}
+print("Exercise 4:")
+print(scr.xml_parse("./books.xml",**_attrs))
