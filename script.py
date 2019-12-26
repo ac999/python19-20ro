@@ -44,3 +44,18 @@ def censure(text):
     return re.sub(r"\b[aeiouAEIOU](\w+)\b",cens_repl,text)
     # (Note that \b is used to represent word boundaries, and means “backspace”
     # only inside character classes.)
+
+def cnp(_cnp):
+    _control="279146358279"
+    _sum=0
+    result = re.search(r"([12])(\d{11})(\d)",_cnp)
+    if not result:
+        return "{} is not a valid CNP.".format(_cnp)
+    _sum+=int(result.group(1))*int(_control[0])
+    _sum+=sum(
+    [int(result.group(2)[i])*int(_control[i+1]) for i in range(len(_control)-1)]
+    )
+    if result.group(3)==str(_sum%11)[0]:
+        return "{} is a valid CNP.".format(_cnp)
+    else:
+        return "{} is not a valid CNP (control number error).".format(_cnp)

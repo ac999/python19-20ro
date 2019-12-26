@@ -34,3 +34,8 @@ print(scr.xml_parse("./books.xml",**_attrs))
 # Exercise 6
 print("Exercise 6:")
 print(scr.censure(_text))
+
+# Exercise 7
+print("Exercise 7:")
+print(scr.cnp("1860331405413"))
+print(scr.cnp("1631006221137"))
