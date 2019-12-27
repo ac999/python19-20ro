@@ -1,4 +1,4 @@
-import re, functools, os
+import re, functools, os, hashlib, datetime
 
 def word_extractor(text):
     return re.findall('\w+', text)
@@ -106,3 +106,38 @@ def the_directory_scrolls(regex, _dir = "."
         [ the_directory_scrolls(regex,os.path.join(_dir,node) )
         for node in os.listdir(_dir) ]
     return _dict
+
+def hash_file(_file, _hash):
+    buffer_size = 4096
+    try:
+        with open(_file, "rb") as f:
+            for chunk in iter(lambda: f.read(buffer_size), b""):
+                _hash.update(chunk)
+        return _hash.hexdigest()
+    except:
+        return ""
+
+
+def get_file_data(_file):
+    try:
+        _return = {
+          "file_name": os.path.splitext(_file)[0]
+        , "md5": hash_file(_file, hashlib.md5())
+        , "sha256": hash_file(_file, hashlib.sha256())
+        , "size_file": os.path.getsize(_file)
+        , "created": datetime.datetime.fromtimestamp(os.path.getctime(_file))
+        .strftime("%Y-%m-%d %H:%M:%S:%f")
+        , "abs_path": os.path.abspath(_file)
+        }
+    except Exception as e:
+        print(e)
+        _return = None
+
+    return _return
+
+
+def get_dir_data(_dir):
+    try:
+        return [get_file_data(_file) for _file in os.listdir(_dir)]
+    except:
+        return []

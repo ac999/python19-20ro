@@ -43,3 +43,7 @@ print(scr.cnp("1631006221137"))
 # Exercise 8:
 print("Exercise 8:")
 print(scr.the_directory_scrolls(r2,"."))
+
+# Exercise 9:
+print("Exercise 9:")
+[print(line) for line in scr.get_dir_data(".")]
