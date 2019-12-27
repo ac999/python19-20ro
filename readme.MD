@@ -1,4 +1,4 @@
-# Regular expressions
+# Regular expressions, serialization, hashes, zip and time module
 
 https://sites.google.com/site/fiipythonprogramming/laboratories/lab-11
 
