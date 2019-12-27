@@ -114,7 +114,8 @@ def hash_file(_file, _hash):
             for chunk in iter(lambda: f.read(buffer_size), b""):
                 _hash.update(chunk)
         return _hash.hexdigest()
-    except:
+    except Exception as e:
+        # print(e)
         return ""
 
 
@@ -130,7 +131,7 @@ def get_file_data(_file):
         , "abs_path": os.path.abspath(_file)
         }
     except Exception as e:
-        print(e)
+        # print(e)
         _return = None
 
     return _return
@@ -141,3 +142,24 @@ def get_dir_data(_dir):
         return [get_file_data(_file) for _file in os.listdir(_dir)]
     except:
         return []
+
+def duplicate_finder(_dir):
+    try:
+        start = datetime.datetime.now()
+        hashes=[]
+        duplicates=[]
+        if not os.path.isdir(_dir):
+            return([], 0)
+        for file in os.listdir(_dir):
+            if os.path.isfile(file):
+                file_hash = hash_file(file,hashlib.sha224())
+                if file_hash not in hashes:
+                    hashes.append(file_hash)
+                else:
+                    duplicates.append(file)
+        end = datetime.datetime.now()
+        rtime = (end-start).total_seconds()
+        return (duplicates, rtime)
+    except Exception as e:
+        print(e)
+        return ([], 0)
