@@ -1,4 +1,4 @@
-import re, functools
+import re, functools, os
 
 def word_extractor(text):
     return re.findall('\w+', text)
@@ -59,3 +59,50 @@ def cnp(_cnp):
         return "{} is a valid CNP.".format(_cnp)
     else:
         return "{} is not a valid CNP (control number error).".format(_cnp)
+
+def condition(regex, file):
+    buffer_size = 2096
+    ok = 0
+    result = re.search(regex,file)
+    if not result:
+        return None
+    if result == os.path.splitext(file)[0]:
+        ok = 1
+    fo = open(file,"r")
+    while True:
+        try:
+            _buffer = fo.read(buffer_size)
+            if re.search(regex,_buffer):
+                if ok == 1:
+                    ok = 3
+                else:
+                    ok = 2
+                break
+        except:
+            _buffer = None
+
+        if not _buffer:
+            break
+    if ok==0:
+        return None
+    if ok==1:
+        return ("name_match", file)
+    if ok==2:
+        return ("content_match", file)
+    if ok==3:
+        return ("both", ">>"+file)
+
+def the_directory_scrolls(regex, _dir = "."
+, _dict = {"name_match": list(), "content_match": list(), "both": list() }
+):
+
+    if os.path.isfile(_dir):
+        _result = condition(regex,_dir)
+        if _result:
+            _dict[_result[0]].append(_result[1])
+
+    if os.path.isdir(_dir):
+
+        [ the_directory_scrolls(regex,os.path.join(_dir,node) )
+        for node in os.listdir(_dir) ]
+    return _dict

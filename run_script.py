@@ -14,12 +14,12 @@ print("Exercise 1:")
 print(scr.word_extractor(_text))
 
 # Exercise 2:
-r1 = '\w+'
+r1 = r'\w+'
 print("Exercise 2:")
 print(scr.apply_re_len(r1,_text,6))
 
 # Exercise 3:
-r2 = '[a-t]+'
+r2 = r'[a-t]+'
 print("Exercise 3:")
 print(scr.apply_listre(_text,[r1,r2]))
 
@@ -31,11 +31,15 @@ _attrs = {
 print("Exercise 4:")
 print(scr.xml_parse("./books.xml",**_attrs))
 
-# Exercise 6
+# Exercise 6:
 print("Exercise 6:")
 print(scr.censure(_text))
 
-# Exercise 7
+# Exercise 7:
 print("Exercise 7:")
 print(scr.cnp("1860331405413"))
 print(scr.cnp("1631006221137"))
+
+# Exercise 8:
+print("Exercise 8:")
+print(scr.the_directory_scrolls(r2,"."))
