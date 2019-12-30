@@ -19,4 +19,3 @@ except Exception as e:
 finally:
     print("Closing socket.")
     s.close()
-WAIT = 1
