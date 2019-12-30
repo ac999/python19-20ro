@@ -31,10 +31,9 @@ try:
         print("Received: ",data)
         if check_data(data):
             response = do_sum(data).encode("UTF-8")
-            connection.send( response )
         else:
             response = "Invalid data.".encode("UTF-8")
-            connection.send( response )
+        connection.send( response )
         print("Sent: ", response )
         # if "." in data: break
     connection.close()
