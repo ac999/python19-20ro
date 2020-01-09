@@ -13,5 +13,12 @@ def try_ex2():
     a_path = "test.zip"
     print("ex2({}): {}".format(a_path, script.ex2(a_path) ) )
 
+def try_ex3():
+    a_path = "test.zip"
+    to_hextract = "script.py"
+    print("ex3({}, {}): {}".format(a_path, to_hextract
+    , script.ex3(a_path, to_hextract)) )
+
 try_ex1()
 try_ex2()
+try_ex3()

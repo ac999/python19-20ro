@@ -1,4 +1,5 @@
 import zipfile
+import hashlib
 from os.path import splitext, isdir
 from os import listdir
 
@@ -26,3 +27,27 @@ def ex2(a_path):
     except Exception as e:
         return list()
     return [_file.filename for _file in z.infolist()]
+
+def ex3(a_path, to_hextract):
+    try:
+        z = zipfile.ZipFile(a_path)
+    except Exception as e:
+        return None
+    try:
+        f = z.open(to_hextract)
+    except Exception as e:
+        return None
+
+    buffer_size = 2096
+
+    try:
+        c = hashlib.md5()
+        while(True):
+            data = f.read(buffer_size)
+            c.update(data)
+            if not data:
+                break
+        return c.hexdigest()
+
+    except Exception as e:
+        raise e
