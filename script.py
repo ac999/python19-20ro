@@ -70,3 +70,9 @@ def ex4(a_path, db_path):
     , dirname( abspath(_file) )
     , run_time
     )) for _file in listdir(a_path)]
+
+def ex5(db_path):
+    if not isfile(db_path):
+        raise Exception("ex5: db_path must be a file.")
+
+    
