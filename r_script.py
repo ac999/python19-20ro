@@ -7,7 +7,7 @@ def try_ex1():
     try:
         script.ex1(a_path, ext, archive_path)
     except Exception as e:
-        print("Error - >", e)
+        print("Error ->", e)
 
 def try_ex2():
     a_path = "test.zip"
@@ -16,9 +16,21 @@ def try_ex2():
 def try_ex3():
     a_path = "test.zip"
     to_hextract = "script.py"
-    print("ex3({}, {}): {}".format(a_path, to_hextract
-    , script.ex3(a_path, to_hextract)) )
+    try:
+        print("ex3({}, {}): {}".format(a_path, to_hextract
+        , script.ex3(a_path, to_hextract)) )
+    except Exception as e:
+        print("Error ->", e)
+
+def try_ex4():
+    a_path = "."
+    db_path = "db.sql"
+    try:
+        script.ex4(a_path, db_path)
+    except Exception as e:
+        print("Error ->", e)
 
 try_ex1()
 try_ex2()
 try_ex3()
+try_ex4()

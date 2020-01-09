@@ -1,6 +1,5 @@
-import zipfile
-import hashlib
-from os.path import splitext, isdir
+import zipfile, hashlib, datetime
+from os.path import splitext, isdir, isfile, abspath, dirname
 from os import listdir
 
 def hasExtension(f_path, extension):
@@ -50,4 +49,24 @@ def ex3(a_path, to_hextract):
         return c.hexdigest()
 
     except Exception as e:
-        raise e
+        raise ("ex3: hashing error ->", e)
+
+def ex4(a_path, db_path):
+    if isfile(db_path):
+        _mode = "a"
+    else:
+        _mode = "w"
+
+    if not isdir(a_path):
+        raise Exception("ex4: a_path must be a directory.")
+
+    run_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    fileObject = open(db_path, _mode)
+
+    [fileObject.writelines("{} , {} , {}\n"
+    .format(
+    _file
+    , dirname( abspath(_file) )
+    , run_time
+    )) for _file in listdir(a_path)]
