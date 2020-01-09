@@ -19,3 +19,10 @@ def ex1(a_path, ext, fa_path = None):
     [ z.write( _file ) for _file in listdir(a_path) if hasExtension(_file, ext)  ]
 
     z.close()
+
+def ex2(a_path):
+    try:
+        z = zipfile.ZipFile(a_path)
+    except Exception as e:
+        return list()
+    return [_file.filename for _file in z.infolist()]

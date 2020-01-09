@@ -9,4 +9,9 @@ def try_ex1():
     except Exception as e:
         print("Error - >", e)
 
+def try_ex2():
+    a_path = "test.zip"
+    print("ex2({}): {}".format(a_path, script.ex2(a_path) ) )
+
 try_ex1()
+try_ex2()
