@@ -75,4 +75,6 @@ def ex5(db_path):
     if not isfile(db_path):
         raise Exception("ex5: db_path must be a file.")
 
-    
+    with open(db_path) as fileObject:
+        return list( map( lambda x: str.strip(x), fileObject.readlines() ) )
+    fileObject.close()

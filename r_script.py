@@ -33,7 +33,7 @@ def try_ex4():
 def try_ex5():
     db_path = "db.sql"
     try:
-        lambda x: print(x), script.ex5(db_path)
+        print('\n'.join( script.ex5(db_path) ) )
     except Exception as e:
         print("Error ->", e)
 
