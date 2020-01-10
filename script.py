@@ -1,4 +1,4 @@
-import zipfile, hashlib, datetime
+import zipfile, hashlib, datetime, sqlite3
 from os.path import splitext, isdir, isfile, abspath, dirname
 from os import listdir
 
@@ -53,28 +53,32 @@ def ex3(a_path, to_hextract):
 
 def ex4(a_path, db_path):
     if isfile(db_path):
-        _mode = "a"
+        create_table = True
     else:
-        _mode = "w"
+        create_table = False
 
     if not isdir(a_path):
         raise Exception("ex4: a_path must be a directory.")
 
     run_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    fileObject = open(db_path, _mode)
+    conn = sqlite3.connect(db_path)
 
-    [fileObject.writelines("{} , {} , {}\n"
-    .format(
-    _file
-    , dirname( abspath(_file) )
-    , run_time
-    )) for _file in listdir(a_path)]
+    c = conn.cursor()
+
+    if create_table:
+        c.execute('''CREATE TABLE files
+        (file_name text, parrent_folder text, date text)''')
+
+    c.execute('''INSERT INTO files)
+    # [fileObject.writelines("{} , {} , {}\n"
+    # .format(
+    # _file
+    # , dirname( abspath(_file) )
+    # , run_time
+    # )) for _file in listdir(a_path)]
 
 def ex5(db_path):
-    if not isfile(db_path):
-        raise Exception("ex5: db_path must be a file.")
-
-    with open(db_path) as fileObject:
-        return list( map( lambda x: str.strip(x), fileObject.readlines() ) )
-    fileObject.close()
+    conn = sqlite3.connect(db_path)
+    # c.execute('')
+    list( map( lambda x: str.strip(x), fileObject.readlines() ) )
