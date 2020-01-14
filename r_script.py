@@ -7,7 +7,7 @@ def try_ex1():
     try:
         script.ex1(a_path, ext, archive_path)
     except Exception as e:
-        print("Error ->", e)
+        print("ex 1. Error ->", e)
 
 def try_ex2():
     a_path = "test.zip"
@@ -20,22 +20,23 @@ def try_ex3():
         print("ex3({}, {}): {}".format(a_path, to_hextract
         , script.ex3(a_path, to_hextract)) )
     except Exception as e:
-        print("Error ->", e)
+        print("ex 3. Error ->", e)
 
 def try_ex4():
     a_path = "."
-    db_path = "db.sql"
+    db_path = "db.sqlite"
     try:
         script.ex4(a_path, db_path)
     except Exception as e:
-        print("Error ->", e)
+        print("ex 4. Error ->", e)
 
 def try_ex5():
-    db_path = "db.sql"
+    db_path = "db.sqlite"
     try:
-        print('\n'.join( script.ex5(db_path) ) )
+        for element in script.ex5(db_path):
+            print("{}".format(element) )
     except Exception as e:
-        print("Error ->", e)
+        print("ex 5. Error ->", e)
 
 try_ex1()
 try_ex2()

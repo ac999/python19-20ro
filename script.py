@@ -52,11 +52,6 @@ def ex3(a_path, to_hextract):
         raise ("ex3: hashing error ->", e)
 
 def ex4(a_path, db_path):
-    if isfile(db_path):
-        create_table = True
-    else:
-        create_table = False
-
     if not isdir(a_path):
         raise Exception("ex4: a_path must be a directory.")
 
@@ -66,19 +61,20 @@ def ex4(a_path, db_path):
 
     c = conn.cursor()
 
-    if create_table:
+    try:
         c.execute('''CREATE TABLE files
         (file_name text, parrent_folder text, date text)''')
+    except sqlite3.OperationalError:
+        pass
 
-    c.execute('''INSERT INTO files)
-    # [fileObject.writelines("{} , {} , {}\n"
-    # .format(
-    # _file
-    # , dirname( abspath(_file) )
-    # , run_time
-    # )) for _file in listdir(a_path)]
+    for _file in listdir(a_path):
+        c.execute('''INSERT INTO files (file_name, parrent_folder, date)
+        VALUES(?, ?, ?)''', (_file, dirname( abspath(_file) ), run_time ) )
+
+    conn.commit()
+    conn.close()
 
 def ex5(db_path):
-    conn = sqlite3.connect(db_path)
-    # c.execute('')
-    list( map( lambda x: str.strip(x), fileObject.readlines() ) )
+    c = sqlite3.connect(db_path).cursor()
+    c.execute("SELECT * FROM files")
+    return c.fetchall()
