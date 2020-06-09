@@ -1,89 +1,84 @@
-def ex1(_list):
-	return list(sorted(_list, key = lambda x: x[1]>x[0]))
+from math import sqrt
+def isVowel(_char):
+	return _char.lower() in 'aeiou'
 
-def ex2(_list, first_name):
-	return first_name in map(lambda x: x[1], _list)
+def ex3(_String):
+	return list(filter(isVowel, _String))
 
-def ex3(operator, a, b):
+def filter_rule_ex4(dict_):
+	for key in dict_:
+		if len(str(key))>=3:
+			return True
+	return False
 
-	operators = {    
+def ex4(*args, **kwargs):
+	_dict=list(filter(lambda x: isinstance(x,dict), args))
+	
+	_list=list(filter(lambda x: isinstance(x,dict),[kwargs[k] for k in kwargs]))
+	for el in _list:
+		_dict.append(el)
+	return list(filter(filter_rule_ex4,_dict))
 
-    "+": lambda a, b: a + b,     
+def ex5(_list):
+	return list(filter(lambda x: isinstance(x,int) or isinstance(x,float), _list))
 
-    "*": lambda a, b: a * b,
+def ex6(Point1, Point2):
+	return tuple(map(lambda x,y: sqrt(pow(y[0]-x[0],2)+pow(y[1]-x[1],2)) ,Point1,Point2))
 
-    "/": lambda a, b: a / b,
+def ex7(_list):
+	x = list(sorted(_list,key = lambda z: z%2))
+	y = list(sorted(_list, key = lambda z: not z%2))
+	return [(x[i],y[i]) for i in range(len(x)//2)]
 
-    "%": lambda a, b: a % b
+def sum_digits(x):
 
-	}
+    return sum(map(int, str(x)))
 
-	return operators[operator](a,b)
+def ex8(**kwargs):
+	_list=[0,1,1]
+	for i in range(3,1000):
+		_list.append(_list[i-1]+_list[i-2])
+	_filters = kwargs.get("filters",None)
+	_limit = kwargs.get("limit",None)
+	_offset = kwargs.get("offset",None)
+	if _filters!=None:
+		for _filter in _filters:
+			_list=list(filter(_filter, _list))
+	if isinstance(_offset, int):
+		if _offset>=0:
+			_list=_list[_offset:]
+	if isinstance(_limit, int):
+		if _limit>=0:
+			_list=_list[:_limit]
 
-def ex4(function, *a, **k):
-	functions = {
+	return _list
+	
 
-    "print_all": lambda *a, **k: print(a, k),
+print(ex3("Programming in Python is fun"))
+print(ex4( {1: 2, 3: 4, 5: 6}, 
 
-    "print_args_commas": lambda *a, **k: print(a, k, sep=", "),
+ {'a': 5, 'b': 7, 'c': 'e'}, 
 
-    "print_only_args": lambda *a, **k: print(a),
+ {2: 3}, 
 
-    "print_only_kwargs": lambda *a, **k: print(k)
+ [1, 2, 3],
 
-	}
+ {'abc': 4, 'def': 5},
 
-	functions[function](a,k)
+ 3764,
 
-def ex5(*args):
-	_ndict={}
-	for _dict in args:
-		for i in _dict:
-			if _ndict.get(i,None) == None:
-				_ndict[i]=_dict[i]
-			else:
-				if isinstance(_ndict.get(i),list):
-					_ndict[i].append(_dict[i])
-				else:
-					_ndict[i]=[_ndict[i],_dict[i]]
-	return _ndict
+ dictionar={'ab': 4, 'ac': 'abcde', 'fg': 'abc'},
 
+ test={1: 1, 'test': True}) )
 
-def ex6(_dict, path="-"):
-	for key in _dict:
-		if not isinstance(_dict.get(key),dict):
-			print (str(path)[3:]+" - "+str(key)+" - "+str(_dict.get(key)))
-		else:
-			ex6(_dict.get(key),path+" - "+key)
+print(ex5([1, "2", {"3": "a"}, {4, 5}, 5, 6, 3.0]))
+print(ex6([(2,-4),(4,3)],[(-2,3),(-3,-4)]))
+print(ex7([1, 3, 5, 2, 8, 7, 4, 10, 9, 2]))
+print(ex8(
+	filters=[lambda item: item % 2 == 0, lambda item: item == 2 or 4 <= sum_digits(item) <= 20],
 
+    limit=2,
 
-
-
-print(ex1([("Lazar", "Ion"), ("Mincu","Maria")]))
-print(ex2([("Lazar", "Ion"), ("Mincu","Maria")], "Ion"))
-print(ex3("+",5,10))
-ex4("print_all", "x", 2, mama="ta", tata="tau")
-print(ex5({1: 10, 2: 20}, {3:30, 4:40, 5:50}, {6:60, 1:70, 4:80}))
-ex6({
-
-   'a': 1,
-
-   'b':
-
-   {
-
-       'c': 3,
-
-       'd':
-
-       {
-
-           'e': 5,
-
-           'f': 6
-
-       }
-
-   }
-
-})
+    offset=2
+    )
+)
