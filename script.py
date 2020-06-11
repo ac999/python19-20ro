@@ -47,13 +47,20 @@ def ex5():
     end_row = len(matrix[0])
     start_col = 0
     end_col = len(matrix)
-    
+
     while start_row < end_row and start_col < end_col:
-        for i in range(start_row, end_row):
-            result+=matrix[start_col][i]
         for i in range(start_col, end_col):
-            result+=matrix[i][end_row-1]
-        break
+            result += matrix[start_col][i]
+        for i in range(start_row+1, end_row):
+            result += matrix[i][end_row-1]
+        for i in range(end_col-2, start_col-1, -1):
+            result += matrix[end_col-1][i]
+        for i in range(end_row-2, start_row, -1):
+            result += matrix[i][start_row]
+        start_row+=1
+        end_row-=1
+        start_col+=1
+        end_col-=1
     return result
 print (ex1())
 print (ex2())
