@@ -6,15 +6,15 @@ def ex2(_list, first_name):
 
 def ex3(operator, a, b):
 
-	operators = {    
+	operators = {
 
-    "+": lambda a, b: a + b,     
+	"+": lambda a, b: a + b,
 
-    "*": lambda a, b: a * b,
+	"*": lambda a, b: a * b,
 
-    "/": lambda a, b: a / b,
+	"/": lambda a, b: a / b,
 
-    "%": lambda a, b: a % b
+	"%": lambda a, b: a % b
 
 	}
 
@@ -23,13 +23,13 @@ def ex3(operator, a, b):
 def ex4(function, *a, **k):
 	functions = {
 
-    "print_all": lambda *a, **k: print(a, k),
+	"print_all": lambda *a, **k: print(a, k),
 
-    "print_args_commas": lambda *a, **k: print(a, k, sep=", "),
+	"print_args_commas": lambda *a, **k: print(a, k, sep=", "),
 
-    "print_only_args": lambda *a, **k: print(a),
+	"print_only_args": lambda *a, **k: print(a),
 
-    "print_only_kwargs": lambda *a, **k: print(k)
+	"print_only_kwargs": lambda *a, **k: print(k)
 
 	}
 
@@ -49,14 +49,13 @@ def ex5(*args):
 	return _ndict
 
 
-def ex6(_dict, path="-"):
+def ex6(_dict, path=""):
 	for key in _dict:
 		if not isinstance(_dict.get(key),dict):
-			print (str(path)[3:]+" - "+str(key)+" - "+str(_dict.get(key)))
+			print(str(path)+f"\'{key}\' - {_dict.get(key)}")
 		else:
-			ex6(_dict.get(key),path+" - "+key)
-
-
+			path += f"\'{key}\' - "
+			ex6(_dict.get(key), path)
 
 
 print(ex1([("Lazar", "Ion"), ("Mincu","Maria")]))
@@ -72,17 +71,17 @@ ex6({
 
    {
 
-       'c': 3,
+	   'c': 3,
 
-       'd':
+	   'd':
 
-       {
+	   {
 
-           'e': 5,
+		   'e': 5,
 
-           'f': 6
+		   'f': 6
 
-       }
+	   }
 
    }
 
