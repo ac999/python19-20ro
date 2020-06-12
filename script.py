@@ -56,3 +56,25 @@ print(ex4( {1: 2, 3: 4, 5: 6},
  dictionar={'ab': 4, 'ac': 'abcde', 'fg': 'abc'},
 
  test={1: 1, 'test': True}))
+
+# ex. 5
+def ex5(_list):
+	return list(filter(lambda x: isinstance(x,int) or isinstance(x, float), _list))
+
+print(ex5([1, "2", {"3": "a"}, {4, 5}, 5, 6, 3.0]))
+
+# ex. 6
+
+def line(a, b):
+	m = (a[1]-b[1])/(a[0]-b[0])
+	return (a[0],a[1],m)
+
+def ex5a(_list1, _list2):
+	return list(map(lambda x,y: line(x,y), _list1, _list2))
+
+def ex5b(_list1, _list2):
+	return [line(element[0], element[1]) for element in zip(_list1, _list2)]
+
+
+print(ex5a([(1,2),(3,4),(5,6)], [(3,-10),(-9,10),(20,10)]))
+print(ex5b([(1,2),(3,4),(5,6)], [(3,-10),(-9,10),(20,10)]))
